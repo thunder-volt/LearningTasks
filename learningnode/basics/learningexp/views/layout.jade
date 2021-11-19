@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body 
+    ul 
+      li my text
+      li  hello 
+    - var condition = true
+    if condition == false 
+      p condition found false  
+    else 
+      p condition found true
+    - myarr = [1,2,3,4];
+    - for(let value = 0; value < myarr.length; value= value+1)
+        p= myarr[value]
+    - for(let val of myarr)
+        p= val
+    block content
+
