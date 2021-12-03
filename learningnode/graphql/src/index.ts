@@ -95,6 +95,7 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
+  @Authorized()
   updateuser(
     @Ctx() { user }: MyContext,
     @Arg("UPDATE") updateUserInput: CreateInputUser
@@ -113,6 +114,7 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
+  @Authorized()
   craeteTODO(@Ctx() { user }: MyContext, @Arg("ADDTODO") Taskvalue: string) {
     try {
       //console.log(req.body);
@@ -130,6 +132,7 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
+  @Authorized()
   async updatetodo(@Arg("UPDATETODO") Id: string, newtask: string) {
     try {
       const todo = await Todo.findOne({ id: Id });
@@ -149,6 +152,7 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
+  @Authorized()
   deletetodo(@Arg("DELETETODO") Id: string) {
     try {
       Todo.delete({ id: Id });
