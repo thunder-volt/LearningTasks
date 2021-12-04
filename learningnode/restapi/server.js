@@ -186,7 +186,6 @@ var deletetodo = async(req, res) => {
             for(let i = 0; i < user.todos.length; i++)
                 if(user.todos[i] === req.body.task.toString()){
                     user.todos.splice(i, 1);
-                    console.log("HI vemda");
                     user.save((err) =>{
                         if(err) res.send({message : err});
                     });

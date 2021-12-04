@@ -41,7 +41,6 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
-  @Authorized()
   async createUser(@Arg("DATA") createUserInput: CreateInputUser) {
     try {
       let user = await User.findOne({ email: createUserInput.email });
@@ -132,7 +131,6 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
-  @Authorized()
   async updatetodo(@Arg("UPDATETODO") Id: string, newtask: string) {
     try {
       const todo = await Todo.findOne({ id: Id });
@@ -152,7 +150,6 @@ class USER_TODO_CRUD {
   }
 
   @Mutation(() => Boolean)
-  @Authorized()
   deletetodo(@Arg("DELETETODO") Id: string) {
     try {
       Todo.delete({ id: Id });
