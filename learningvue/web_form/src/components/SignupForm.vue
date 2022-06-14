@@ -19,9 +19,9 @@
             <option value="2026">2026</option>
         </select>
     </form>
-    <span v-if="name">Your Name Is : {{ name }}, </span>
-    <span v-if="name">Your Degree Is : {{ degree }}, </span>
-    <span v-if="degree">You are graduating in {{ year }}.</span>
+    <span v-if="name !== ''">Your Name Is : {{ name }}, </span>
+    <span v-if="degree !== ''">Your Degree Is : {{ degree }}, </span>
+    <span v-if="year !== ''">You are graduating in {{ year }}.</span>
 </template>
 
 <script>
