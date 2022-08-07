@@ -20,7 +20,7 @@ class User extends BaseEntity {
   username: string;
 
   @Column()
-  @Field()
+  // we don't make password a field, it shouldn't be accessed in the graphql
   password: string;
 
   @Column()
@@ -31,8 +31,8 @@ class User extends BaseEntity {
   @Field((_type) => Number)
   age: number;
 
-  @OneToMany((_type) => Todo, (todos) => todos.user)
-  @Field((_type) => [Todo])
+  @OneToMany((_type) => Todo, (todos) => todos.user, { nullable: true })
+  @Field((_type) => [Todo], { nullable: true })
   todos: Todo[];
 }
 

@@ -12,7 +12,7 @@ class CreateUserInput {
   @Field()
   password: string;
 
-  @Field({ nullable: true })
+  @Field((_type) => Number, { nullable: true })
   age: number;
 }
 
@@ -26,4 +26,19 @@ class LoginInput {
   password: string;
 }
 
-export { CreateUserInput, LoginInput };
+@InputType("UpdateUserInput")
+class UpdateUserInput {
+  @Field({ nullable: true })
+  username: string;
+
+  @Field({ nullable: true })
+  email: string;
+
+  @Field({ nullable: true })
+  password: string;
+
+  @Field((_type) => Number, { nullable: true })
+  age: number;
+}
+
+export { CreateUserInput, LoginInput, UpdateUserInput };
