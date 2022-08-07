@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 
-@ObjectType("loginOutput")
+@ObjectType("LoginOutput")
 class LoginOutput {
   @Field()
   token: string;

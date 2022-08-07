@@ -2,9 +2,19 @@ import User from "../entities/user";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { CreateUserInput, LoginInput, UpdateUserInput } from "../inputs/user";
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Authorized,
+  Ctx,
+  FieldResolver,
+  Mutation,
+  Query,
+  Resolver,
+  Root,
+} from "type-graphql";
 import LoginOutput from "../types/objects";
 import MyContext from "../utils/context";
+import Todo from "src/entities/todo";
 
 @Resolver(() => User)
 class UserResolver {
@@ -50,16 +60,35 @@ class UserResolver {
 
   @Mutation(() => User)
   @Authorized()
-  async updateUser(@Arg("UpdateUserInput") updateUserInput: UpdateUserInput) {
+  async updateUser(
+    @Ctx() { user }: MyContext,
+    @Arg("UpdateUserInput") updateUserInput: UpdateUserInput
+  ) {
     try {
-      const userUpdated = new User();
-      if (updateUserInput.username)
-        userUpdated.username = updateUserInput.username;
-      if (updateUserInput.email) userUpdated.email = updateUserInput.email;
+      if (updateUserInput.username) user.username = updateUserInput.username;
+      if (updateUserInput.email) user.email = updateUserInput.email;
       if (updateUserInput.password)
-        userUpdated.password = updateUserInput.password;
-      if (updateUserInput.age) userUpdated.age = updateUserInput.age;
+        user.password = bcryptjs.hashSync(
+          updateUserInput.password,
+          Number(process.env.ITR)
+        );
+      if (updateUserInput.age) user.age = updateUserInput.age;
+      const userUpdated = await user.save();
       return userUpdated;
+    } catch (e) {
+      throw new Error(`error : ${e}`);
+    }
+  }
+
+  @FieldResolver(() => [Todo])
+  async todos(@Root() { id, todos }: User) {
+    try {
+      if (todos) return todos;
+      const user = await User.findOne({
+        where: { id: id },
+        relations: ["todos"],
+      });
+      return user!.todos;
     } catch (e) {
       throw new Error(`error : ${e}`);
     }
