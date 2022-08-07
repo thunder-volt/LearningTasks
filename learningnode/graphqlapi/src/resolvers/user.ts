@@ -14,7 +14,7 @@ import {
 } from "type-graphql";
 import LoginOutput from "../types/objects";
 import MyContext from "../utils/context";
-import Todo from "src/entities/todo";
+import Todo from "../entities/todo";
 
 @Resolver(() => User)
 class UserResolver {

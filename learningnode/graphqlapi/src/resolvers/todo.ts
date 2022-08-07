@@ -11,7 +11,7 @@ import {
 } from "type-graphql";
 import Todo from "../entities/todo";
 import { CreateTodoInput, UpdateTodoInput } from "../inputs/todo";
-import User from "src/entities/user";
+import User from "../entities/user";
 
 @Resolver(() => Todo)
 class TodoResolver {
