@@ -1,7 +1,7 @@
 import User from "../entities/user";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { CreateUserInput, LoginInput, UpdateUserInput } from "../types/inputs";
+import { CreateUserInput, LoginInput, UpdateUserInput } from "../inputs/user";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import LoginOutput from "../types/objects";
 import MyContext from "../utils/context";
