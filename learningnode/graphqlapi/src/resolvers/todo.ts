@@ -16,10 +16,14 @@ import User from "../entities/user";
 @Resolver(() => Todo)
 class TodoResolver {
   @Mutation(() => Todo)
-  async createTodo(@Arg("TodoInput") createTodoInput: CreateTodoInput) {
+  async createTodo(
+    @Ctx() { user }: MyContext,
+    @Arg("TodoInput") createTodoInput: CreateTodoInput
+  ) {
     try {
       const todoCreated = await Todo.create({
         description: createTodoInput.description,
+        user: user,
       }).save();
       return todoCreated;
     } catch (e) {
